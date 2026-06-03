@@ -16,3 +16,6 @@ src/*.irx
 **/target
 src/webui/WebContent/static
 src/bank-application-frontend/.whitesource
+
+# Bob Z Extension - Local settings and generated files
+.bobz/

@@ -1,0 +1,365 @@
+{
+  "version": "2.0.0",
+  "entries": [
+    {
+      "name": "COMM-CUSTNO",
+      "type": "variable",
+      "shortDescription": "Communication Area Customer Number",
+      "longDescription": "A field within the DFHCOMMAREA (Communication Area) that stores the unique 10-digit customer identifier passed from the calling program. This value is used to validate customer existence by linking to the INQCUST program and is essential for account creation operations.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "ACCOUNT-NUMBER",
+      "type": "variable",
+      "shortDescription": "Account Number",
+      "longDescription": "An 8-digit numeric field representing the newly generated account number obtained from the Named Counter mechanism. This is the primary identifier for the account being created and is returned to the calling program upon successful account creation.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "COMM-ACC-TYPE",
+      "type": "variable",
+      "shortDescription": "Communication Area Account Type",
+      "longDescription": "A field in the DFHCOMMAREA that specifies the type of account being created (e.g., 'SAVING', 'CURRENT', 'MORTGAGE', 'LOAN', 'ISA'). This value is validated against allowed account types and stored in the DB2 ACCOUNT table.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-CUST-NO",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Customer Number",
+      "longDescription": "A DB2 host variable (10 characters) used to store the customer number when inserting a new account record into the ACCOUNT table. This links the account to its owning customer.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-SORTCODE",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Sort Code",
+      "longDescription": "A DB2 host variable (6 characters) representing the bank branch sort code for the account. This is part of the account's primary key in the ACCOUNT table and identifies which branch manages the account.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-ACC-NO",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Account Number",
+      "longDescription": "A DB2 host variable (8 characters) that stores the account number for database operations. This is part of the account's primary key and is populated from the Named Counter before inserting into the ACCOUNT table.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-OPENED",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Opened Date",
+      "longDescription": "A DB2 host variable (10 characters in DD.MM.YYYY format) that stores the date when the account was opened. This is set to the current system date during account creation and is stored in the ACCOUNT table.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-INT-RATE",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Interest Rate",
+      "longDescription": "A DB2 host variable (packed decimal S9(4)V99) representing the interest rate for the account. The value is expressed as a percentage with two decimal places (e.g., 0325 represents 3.25%).",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-OVERDRAFT-LIM",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Overdraft Limit",
+      "longDescription": "A DB2 host variable (binary S9(9)) that stores the maximum overdraft limit allowed for the account. This represents the amount by which the account can be overdrawn, expressed in the account's currency.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-AVAIL-BAL",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Available Balance",
+      "longDescription": "A DB2 host variable (packed decimal S9(10)V99) representing the available balance in the account. For new accounts, this is initialized to zero and represents the funds available for withdrawal.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-ACTUAL-BAL",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Actual Balance",
+      "longDescription": "A DB2 host variable (packed decimal S9(10)V99) representing the actual balance in the account. For new accounts, this is initialized to zero and represents the true account balance including pending transactions.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "NCS-ACC-NO-NAME",
+      "type": "variable",
+      "shortDescription": "Named Counter Service Account Number Name",
+      "longDescription": "A 16-character resource name used for ENQ/DEQ operations on the Named Counter. It consists of 'CBSAACCT' (8 chars) + sort code (6 chars) + filler (2 chars). This ensures exclusive access to the account number counter for a specific branch.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "NCS-ACC-NO-VALUE",
+      "type": "variable",
+      "shortDescription": "Named Counter Service Account Number Value",
+      "longDescription": "A 16-digit computational field (PIC 9(16) COMP) that holds the current value retrieved from the Named Counter. This represents the next available account number for the branch and is incremented after successful account creation.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "COMM-SUCCESS",
+      "type": "variable",
+      "shortDescription": "Communication Area Success Flag",
+      "longDescription": "A single-character flag in the DFHCOMMAREA indicating whether the account creation operation completed successfully ('Y') or failed ('N'). This is the primary return status indicator to the calling program.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "COMM-FAIL-CODE",
+      "type": "variable",
+      "shortDescription": "Communication Area Failure Code",
+      "longDescription": "A single-character field in the DFHCOMMAREA that contains a specific error code when COMM-SUCCESS is 'N'. Values include: '1' (customer not found), '3' (ENQ failed), '8' (too many accounts), '9' (account count error). This helps the calling program determine the specific failure reason.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "ACTIONI",
+      "type": "variable",
+      "shortDescription": "Action Input Field",
+      "longDescription": "A single-character input field from the BMS map (BNK1ME) that captures the user's menu selection. Valid values are '1' through '7' for menu options and 'A' for administrative functions. This field determines which transaction will be invoked next.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "ACTION-CHAR",
+      "type": "variable",
+      "shortDescription": "Action Character",
+      "longDescription": "A single-character working storage field that stores the validated menu selection from ACTIONI. This value is used to determine which CICS transaction to invoke (ODCS, OCRA, OCAC, ODAC, OUAC, OTFN, ODCA, or OADA).",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "VALID-DATA-SW",
+      "type": "variable",
+      "shortDescription": "Valid Data Switch",
+      "longDescription": "A single-character switch (PIC X) with an 88-level condition VALID-DATA that indicates whether the user's menu selection passed validation. Set to 'Y' for valid input (options 1-7 or A) and 'N' for invalid input. Controls whether transaction invocation proceeds.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "SEND-FLAG",
+      "type": "variable",
+      "shortDescription": "Send Flag",
+      "longDescription": "A single-character flag that controls how the BMS map is sent to the terminal. Has three 88-level conditions: SEND-ERASE (value '1') for initial display with erased fields, SEND-DATAONLY (value '2') for data-only updates, and SEND-DATAONLY-ALARM (value '3') for error messages with alarm.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "MESSAGEO",
+      "type": "variable",
+      "shortDescription": "Message Output Field",
+      "longDescription": "An output field in the BMS map used to display messages to the user. Contains validation error messages (e.g., 'You must enter a valid value (1-7 or A)'), invalid key messages, or other informational text. Cleared with LOW-VALUES or SPACES before new messages.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "WS-CICS-RESP",
+      "type": "variable",
+      "shortDescription": "Working Storage CICS Response Code",
+      "longDescription": "A binary computational field (PIC S9(8) COMP) that stores the CICS response code from API calls. Used to check if operations completed successfully (DFHRESP(NORMAL)) or encountered errors (e.g., DFHRESP(MAPFAIL)). Critical for error handling and abend processing.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "WS-CICS-RESP2",
+      "type": "variable",
+      "shortDescription": "Working Storage CICS Response Code 2",
+      "longDescription": "A binary computational field (PIC S9(8) COMP) that stores the secondary CICS response code providing additional detail about errors. Used in conjunction with WS-CICS-RESP for comprehensive error diagnosis and is passed to the abend handler (ABNDPROC).",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "COMMUNICATION-AREA",
+      "type": "variable",
+      "shortDescription": "Communication Area",
+      "longDescription": "A single-character field (PIC X) used as the COMMAREA when returning to the OMEN transaction. Maintains pseudo-conversational state between menu interactions. Length is 1 byte as minimal state is needed for menu navigation.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "WS-ORIG-DATE",
+      "type": "variable",
+      "shortDescription": "Working Storage Original Date",
+      "longDescription": "A 10-character field (PIC X(10)) that stores the current date in DD.MM.YYYY format. Populated by the POPULATE-TIME-DATE section and used for display on the menu screen and in abend records. Redefined by WS-ORIG-DATE-GRP for component access.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "WS-TIME-NOW",
+      "type": "variable",
+      "shortDescription": "Working Storage Time Now",
+      "longDescription": "A 6-digit numeric field (PIC 9(6)) that stores the current time in HHMMSS format. Populated by EXEC CICS ASKTIME and used for display on the menu screen and in abend records. Redefined by WS-TIME-NOW-GRP for component access (hours, minutes, seconds).",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "ABNDINFO-REC",
+      "type": "variable",
+      "shortDescription": "Abend Information Record",
+      "longDescription": "A copybook structure (COPY ABNDINFO) that contains comprehensive abend information including response codes, task number, transaction ID, timestamp, program name, and free-form error message. Populated when errors occur and passed to the ABNDPROC program for logging.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "WS-ABEND-PGM",
+      "type": "variable",
+      "shortDescription": "Working Storage Abend Program Name",
+      "longDescription": "An 8-character field (PIC X(8)) initialized to 'ABNDPROC' that contains the name of the abend handler program. Used in EXEC CICS LINK statements to invoke the centralized error logging program when CICS API failures occur.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "END-OF-SESSION-MESSAGE",
+      "type": "variable",
+      "shortDescription": "End Of Session Message",
+      "longDescription": "A 13-character field (PIC X(13)) initialized to 'Session Ended' that is displayed to the user when they press PF3 or PF12 to terminate their session. Sent via EXEC CICS SEND TEXT before returning control to CICS.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "ACTIONL",
+      "type": "variable",
+      "shortDescription": "Action Length Field",
+      "longDescription": "A binary field from the BMS map that indicates the length of data entered in the ACTIONI field. Set to -1 to position the cursor at the action input field when displaying the map. Part of the standard BMS attribute byte structure.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    },
+    {
+      "name": "BNK1MEO",
+      "type": "variable",
+      "shortDescription": "Bank 1 Menu Output Map",
+      "longDescription": "The output symbolic map structure for the BNK1ME map in the BNK1MAI mapset. Contains all output fields for the menu screen including date, time, message, and action fields. Initialized with LOW-VALUES before sending the map to clear previous data.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "BNKMENU"
+        }
+      ]
+    }
+  ]
+}
