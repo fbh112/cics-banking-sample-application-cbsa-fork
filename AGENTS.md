@@ -36,7 +36,7 @@ Changes to COBOL programs affect all three interfaces.
 ## Data Dictionary
 **Location:** bobz/DD.json
 The data dictionary contains variable definitions and descriptions for COBOL programs.
-Currently includes: CREACC program (15 entries), BNKMENU program (15 entries)
+Currently includes: 33 total entries covering CREACC and other programs
 
 ## Technical Documentation
 

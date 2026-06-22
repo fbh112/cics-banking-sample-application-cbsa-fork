@@ -360,6 +360,42 @@
           "programName": "BNKMENU"
         }
       ]
+    },
+    {
+      "name": "HV-ACCOUNT-LAST-STMT",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Last Statement Date",
+      "longDescription": "A DB2 host variable within the HOST-ACCOUNT-ROW structure used to store the date of the last account statement. Formatted as a 10-character string in DD.MM.YYYY format, representing when the most recent statement was generated.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "HV-ACCOUNT-NEXT-STMT",
+      "type": "variable",
+      "shortDescription": "Host Variable Account Next Statement Date",
+      "longDescription": "A DB2 host variable within the HOST-ACCOUNT-ROW structure used to store the date of the next scheduled account statement. Formatted as a 10-character string in DD.MM.YYYY format, calculated as 30 days from the account opening date.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
+    },
+    {
+      "name": "NUMBER-OF-ACCOUNTS",
+      "type": "variable",
+      "shortDescription": "Number of Accounts",
+      "longDescription": "A variable from the INQACCCU-COMMAREA that stores the count of accounts already owned by the customer. Used to enforce the business rule that a customer cannot have more than 9 accounts. If this limit is exceeded, account creation is rejected with fail code '8'.",
+      "origin": "AI",
+      "scope": [
+        {
+          "programName": "CREACC"
+        }
+      ]
     }
   ]
 }
