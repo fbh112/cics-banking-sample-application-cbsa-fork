@@ -328,6 +328,7 @@
 
            IF WS-CICS-RESP IS NOT EQUAL TO DFHRESP(NORMAL)
              DISPLAY 'Error counting accounts'
+             DISPLAY 'Hello from Training'
              MOVE 'N' to COMM-SUCCESS IN DFHCOMMAREA
              MOVE 'N' to COMM-SUCCESS IN INQACCCU-COMMAREA
              MOVE '9' TO COMM-FAIL-CODE IN DFHCOMMAREA
