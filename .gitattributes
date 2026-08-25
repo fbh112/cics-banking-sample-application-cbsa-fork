@@ -19,3 +19,6 @@
 *.aar binary
 *.sar binary
 *.png binary
+
+# diagram files
+*.jpg
